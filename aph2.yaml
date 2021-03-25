@@ -1,0 +1,35 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: phpaph2
+  labels:
+    app: phpaph2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: phpaph2
+      template:
+       metadata:
+         labels:
+          app: phpaph2
+    spec:
+      containers:
+      - image: dim2996/aph
+        name: phpaph2
+        ports:
+        - containerPort: 80
+          name: phpaph2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpaph2-service
+spec:
+  type: NodePort
+  selector:
+    app: phpaph2
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
